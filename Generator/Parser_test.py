@@ -5,4 +5,4 @@ def test_contructor():
     src = "file.owl"
     tp = Parser(src)
 
-    assert tp.OwlSrc == src
+    assert tp.OwlSrc == ""
