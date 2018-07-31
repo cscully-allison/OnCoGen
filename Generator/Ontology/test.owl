@@ -1,0 +1,57 @@
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:nrdc-rsh="https://www.sensor.nevada.edu/ontologies/research_site_hierarchy#">
+  <!-- ^ This namespace is expected to be declared. Or needs to be self-referential at the very least?
+        Other standard namespaces (rdf, owl, rdfs, dc) can be ignored for now I think-->
+
+  <!-- Describes our ontology in general. We likely do not need to query for this.-->
+  <owl:Ontology rdf:about="https://www.sensor.nevada.edu/metadata/research_site_hierarchy">
+    <dc:title>NRDC Research Site Hierarchy</dc:title>
+    <dc:description>An ontology for defining the structural hierarchy of NRDC research sites and associated metadata. </dc:description>
+  </owl:Ontology>
+
+  <!-- First instances of a general class of objects these will describe a table in general. A vocabulary of similar terms should be developed at some point. Maybe even object.-->
+  <owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#metadata_entity">
+    <rdfs:label>Metadata Entity</rdfs:label>
+    <rdfs:comment>This class describes all possible groupings that could contain research site related organizational metadata and other possible metadata assocaited with a research site. All other classes in this ontology should inherit from this class.</rdfs:comment>
+  </owl:Class>
+
+  <!-- General instance of a general table. These exist in a strict parent-child hierarchy. -->
+  <owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier">
+
+    <rdfs:subClassOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#metadata_entity"/>
+
+    <rdfs:label>Organizational Tier</rdfs:label>
+    <rdfs:comment>Describes a general organizational tier of a research site hierarchy. Specific instances contain identifying data and relational data </rdfs:comment>
+  </owl:Class>
+
+  <!-- Second general instance of a general table. These exist with a braoder relation to other table. Intermediary tables and the like fall into this category. -->
+  <!-- <owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#associated_entity">
+
+    <rdfs:subClassOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#metadata_entity"/>
+
+    <rdfs:label>An Entity Associated with an Organizational Tier</rdfs:label>
+    <rdfs:comment>Describes an entity containing data or metadata associated with an organizational tier.</rdfs:comment>
+
+  </owl:Class> -->
+
+  <rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network">
+		<!--Metadata about site network as a general entity-->
+		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<nrdc-rsh:name>Site Network</nrdc-rsh:name>
+		<nrdc-rsh:pluralization>Site Networks</nrdc-rsh:pluralization>
+
+    <!--Ordinal characteristics are essentially our primary key. -->
+    <nrdc-rsh:ordinal-characteristic>Network ID</nrdc-rsh:ordinal-characteristic>
+
+    <!--Characteristics referring to the types of data we store about individal site networks. These would relate to columns in relational database.-->
+		<nrdc-rsh:characteristic>Name</nrdc-rsh:characteristic>
+    <nrdc-rsh:characteristic>Principal Investigator</nrdc-rsh:characteristic>
+
+	</rdf:Description>
+
+
+</rdf:RDF>
