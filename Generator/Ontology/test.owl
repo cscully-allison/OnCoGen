@@ -2,8 +2,9 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema-datatypes"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:nrdc-rsh="https://www.sensor.nevada.edu/ontologies/research_site_hierarchy#">
+	xmlns:nrdcrsh="https://www.sensor.nevada.edu/ontologies/research_site_hierarchy#">
   <!-- ^ This namespace is expected to be declared. Or needs to be self-referential at the very least?
         Other standard namespaces (rdf, owl, rdfs, dc) can be ignored for now I think-->
 
@@ -28,6 +29,15 @@
     <rdfs:comment>Describes a general organizational tier of a research site hierarchy. Specific instances contain identifying data and relational data </rdfs:comment>
   </owl:Class>
 
+  <owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#characteristic">
+    <rdfs:label>Characteristic of a metadata entity.</rdfs:label>
+    <rdfs:comment>
+      A single characteristic of a metadata entity.
+      These are general descriptions of data that we want to store about specific istances of objects our data is describing. I.E. "Name", "Location", "Serial Number".
+      These will correspond to the columns of the tables we are creating and represent important information we want to store about the group of objects we are recording data about.
+    </rdfs:comment>
+  </owl:Class>
+
   <!-- Second general instance of a general table. These exist with a braoder relation to other table. Intermediary tables and the like fall into this category. -->
   <!-- <owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#associated_entity">
 
@@ -41,15 +51,60 @@
   <rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network">
 		<!--Metadata about site network as a general entity-->
 		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
-		<nrdc-rsh:name>Site Network</nrdc-rsh:name>
-		<nrdc-rsh:pluralization>Site Networks</nrdc-rsh:pluralization>
+		<nrdcrsh:name>Site Network</nrdcrsh:name>
+    <nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
+		<nrdcrsh:pluralization>Site Networks</nrdcrsh:pluralization>
 
     <!--Ordinal characteristics are essentially our primary key. -->
-    <nrdc-rsh:ordinal-characteristic>Network ID</nrdc-rsh:ordinal-characteristic>
+    <nrdcrsh:ordinalCharacteristic>Network ID</nrdcrsh:ordinalCharacteristic>
 
     <!--Characteristics referring to the types of data we store about individal site networks. These would relate to columns in relational database.-->
-		<nrdc-rsh:characteristic>Name</nrdc-rsh:characteristic>
-    <nrdc-rsh:characteristic>Principal Investigator</nrdc-rsh:characteristic>
+		<nrdcrsh:characteristic>Name</nrdcrsh:characteristic>
+    <nrdcrsh:characteristic>Principal Investigator</nrdcrsh:characteristic>
+
+	</rdf:Description>
+
+  <rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site">
+
+		<!--Metadata about sites as a general entity-->
+		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<nrdcrsh:name>Site</nrdcrsh:name>
+		<nrdcrsh:pluralization>Sites</nrdcrsh:pluralization>
+		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
+		<nrdcrsh:childOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
+
+		<!--Characteristics referring to the types of data we store about individal sites. These would relate to columns in relational database.-->
+    <nrdcrsh:characteristic>
+      <rdf:Description>
+        <rdfs:label>Name</rdfs:label>
+        <nrdcrsh:datatype rdf:resource="xsd:string"/>
+      </rdf:Description>
+    </nrdcrsh:characteristic>
+    <nrdcrsh:characteristic>
+      <rdf:Description>
+        <rdfs:label>Principal Investigator</rdfs:label>
+        <nrdcrsh:datatype rdf:resource="xsd:string"/>
+      </rdf:Description>
+    </nrdcrsh:characteristic>\
+		<nrdcrsh:characteristic>
+      <rdf:Description>
+        <rdfs:label>Unique Indentifier</rdfs:label>
+        <nrdcrsh:datatype rdf:resource="xsd:string"/>
+      </rdf:Description>
+    </nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>
+      <rdf:Description>
+        <rdfs:label>Network ID</rdfs:label>
+        <nrdcrsh:datatype rdf:resource="xsd:string"/>
+      </rdf:Description>
+    </nrdcrsh:characteristic>
+		<nrdcrsh:ordinalCharacteristic>
+      <rdf:Description>
+        <rdfs:label>Site ID</rdfs:label>
+        <nrdcrsh:datatype rdf:resource="xsd:string"/>
+      </rdf:Description>
+   </nrdcrsh:ordinalCharacteristic>
+
 
 	</rdf:Description>
 
