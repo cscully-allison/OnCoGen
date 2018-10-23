@@ -3,7 +3,7 @@
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:nrdc-rsh="https://www.sensor.nevada.edu/ontologies/research_site_hierarchy#">
+	xmlns:nrdcrsh="https://www.sensor.nevada.edu/ontologies/research_site_hierarchy#">
 
 	<owl:Ontology rdf:about="https://www.sensor.nevada.edu/metadata/research_site_hierarchy">
 		<dc:title>NRDC Research Site Hierarchy</dc:title>
@@ -33,43 +33,126 @@
 
 	</owl:Class>
 
+	<owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#characteristic">
+		<rdfs:label>Characteristic of a metadata entity.</rdfs:label>
+		<rdfs:comment>
+			A single characteristic of a metadata entity.
+			These are general descriptions of data that we want to store about specific istances of objects our data is describing. I.E. "Name", "Location", "Serial Number".
+			These will correspond to the columns of the tables we are creating and represent important information we want to store about the group of objects we are recording data about.
+		</rdfs:comment>
+	</owl:Class>
+
 
 
 	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#document">
 		<!--Metadata about document as a general entity-->
-		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#assocaited_entity">
-		<nrdc-rsh:name>Document</nrdc-rsh:name>
-		<nrdc-rsh:pluralization>Documents</nrdc-rsh:pluralization>
-		<nrdc-rsh:assocaitedWith rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
-		<nrdc-rsh:assocaitedWith rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
-		<nrdc-rsh:assocaitedWith rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
-		<nrdc-rsh:assocaitedWith rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
+		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#assocaited_entity" />
+		<nrdcrsh:name>Document</nrdcrsh:name>
+		<nrdcrsh:pluralization>Documents</nrdcrsh:pluralization>
+		<nrdcrsh:assocaitedWith rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
+		<nrdcrsh:assocaitedWith rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
+		<nrdcrsh:assocaitedWith rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
+		<nrdcrsh:assocaitedWith rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
 
 		<!--Characteristics referring to the types of data we store about individal documents. These would relate to columns of a table in relational database.
 		"Characteristics" can be made more specific by being broken down into subgroups of indeifying, associative and standard-->
-		<nrdc-rsh:characteristic>Document ID</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Network ID</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Site ID</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>System ID</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Deployment ID</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Name</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Path</nrdc-rsh:characteristic>
+		<nrdcrsh:characteristic>Document ID</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Network ID</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Site ID</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>System ID</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Deployment ID</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Name</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Path</nrdcrsh:characteristic>
 	</rdf:Description>
 
 	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network">
 
 		<!--Metadata about site network as a general entity-->
 		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
-		<nrdc-rsh:name>Site Network</nrdc-rsh:name>
-		<nrdc-rsh:pluralization>Site Networks</nrdc-rsh:pluralization>
-		<nrdc-rsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
+		<nrdcrsh:name>Site Network</nrdcrsh:name>
+		<nrdcrsh:pluralization>Site Networks</nrdcrsh:pluralization>
+		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
 
 
 		<!--Characteristics referring to the types of data we store about individal site networks. These would relate to columns in relational database.-->
-		<nrdc-rsh:characteristic>Name</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Principal Investigator</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Unique Identifier</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Network ID</nrdc-rsh:characteristic>
+		<nrdcrsh:ordinalCharacteristic>
+			<rdf:Description>
+        <rdfs:label>Network</rdfs:label>
+        <nrdcrsh:datatype rdf:resource="xsd:integer"/>
+      </rdf:Description>
+		</nrdcrsh:ordinalCharacteristic>
+
+
+		<!-- Handling foreign characteristics? Requires a different term or some rdf:resource refrence. Anonomous refrence somehow? -->
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Principal Investigator</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Unique Identifier</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:ID"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Name</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Alias</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Institution Name</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Original Funding Agency</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Grant Number String</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Started Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Started Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Started Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
 
 	</rdf:Description>
 
@@ -77,17 +160,17 @@
 
 		<!--Metadata about sites as a general entity-->
 		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
-		<nrdc-rsh:name>Site</nrdc-rsh:name>
-		<nrdc-rsh:pluralization>Sites</nrdc-rsh:pluralization>
-		<nrdc-rsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
-		<nrdc-rsh:childOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
+		<nrdcrsh:name>Site</nrdcrsh:name>
+		<nrdcrsh:pluralization>Sites</nrdcrsh:pluralization>
+		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
+		<nrdcrsh:childOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
 
 		<!--Characteristics referring to the types of data we store about individal sites. These would relate to columns in relational database.-->
-		<nrdc-rsh:characteristic>Name</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Principal Investigator</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Unique Identifier</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Network ID</nrdc-rsh:characteristic>
-		<nrdc-rsh:characteristic>Site ID</nrdc-rsh:characteristic>
+		<nrdcrsh:characteristic>Name</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Principal Investigator</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Unique Identifier</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Network ID</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>Site ID</nrdcrsh:characteristic>
 
 
 	</rdf:Description>
