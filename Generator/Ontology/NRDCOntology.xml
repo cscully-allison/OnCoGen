@@ -43,7 +43,7 @@
 	</owl:Class>
 
 
-
+<!-- In Progress: An "associated entity". Focus on the orginizational tiers for now. -->
 	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#document">
 		<!--Metadata about document as a general entity-->
 		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#assocaited_entity" />
@@ -63,8 +63,11 @@
 		<nrdcrsh:characteristic>Deployment ID</nrdcrsh:characteristic>
 		<nrdcrsh:characteristic>Name</nrdcrsh:characteristic>
 		<nrdcrsh:characteristic>Path</nrdcrsh:characteristic>
+
 	</rdf:Description>
 
+
+<!--Descriptor of a site network with all associated characteristics-->
 	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network">
 
 		<!--Metadata about site network as a general entity-->
@@ -84,13 +87,14 @@
 
 
 		<!-- Handling foreign characteristics? Requires a different term or some rdf:resource refrence. Anonomous refrence somehow? -->
-		<nrdcrsh:characteristic>
+		<nrdcrsh:referentialCharacteristic>
 			<rdf:Description>
 				<rdfs:label>Principal Investigator</rdfs:label>
 				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
 			</rdf:Description>
-		</nrdcrsh:characteristic>
+		</nrdcrsh:referentialCharacteristic>
 
+		<!-- Normal Characteristics -->
 		<nrdcrsh:characteristic>
 			<rdf:Description>
 				<rdfs:label>Unique Identifier</rdfs:label>
@@ -165,17 +169,451 @@
 		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
 		<nrdcrsh:childOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
 
+		<!-- Primary orginizing characteristic which orders the data we will store. This is a synthetic value -->
+		<nrdcrsh:ordinalCharacteristic>
+			<rdf:Description>
+				<rdfs:label>Site</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+			</rdf:Description>
+		</nrdcrsh:ordinalCharacteristic>
+
+
+		<!-- Characteristic representitive of a foreign key. Requires a different term or some rdf:resource refrence.-->
+		<nrdcrsh:referentialCharacteristic>
+			<rdf:Description>
+				<rdfs:label>Network</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+				<!--Here there should be a refrence to the Orginizational Tier this refers to-->
+				<nbrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
+			</rdf:Description>
+		</nrdcrsh:referentialCharacteristic>
+
 		<!--Characteristics referring to the types of data we store about individal sites. These would relate to columns in relational database.-->
-		<nrdcrsh:characteristic>Name</nrdcrsh:characteristic>
-		<nrdcrsh:characteristic>Principal Investigator</nrdcrsh:characteristic>
-		<nrdcrsh:characteristic>Unique Identifier</nrdcrsh:characteristic>
-		<nrdcrsh:characteristic>Network ID</nrdcrsh:characteristic>
-		<nrdcrsh:characteristic>Site ID</nrdcrsh:characteristic>
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Unique Identifier</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:ID"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Name</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Alias</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Notes</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<!--This one is super unique. Data type in SQL is "geography". It looks like a special type of hex.-->
+		<!--
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Location</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic> -->
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Time Zone Name</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Time Zone Abbreviation</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Time Zone Offset</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:int"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Creation Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Modification Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>GPS Landmark</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Landmark Photo</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:hexBinary"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+
+	</rdf:Description>
+
+	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system">
+
+		<!--Metadata about sites as a general entity-->
+		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<nrdcrsh:name>System</nrdcrsh:name>
+		<nrdcrsh:pluralization>Systems</nrdcrsh:pluralization>
+		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
+		<nrdcrsh:childOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
+
+		<!-- Primary orginizing characteristic which orders the data we will store. This is a synthetic value -->
+		<nrdcrsh:ordinalCharacteristic>
+			<rdf:Description>
+				<rdfs:label>System</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+			</rdf:Description>
+		</nrdcrsh:ordinalCharacteristic>
+
+
+		<!-- Characteristic representitive of a foreign key. Requires a different term or some rdf:resource refrence.-->
+		<nrdcrsh:referentialCharacteristic>
+			<rdf:Description>
+				<rdfs:label>Site</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+				<!--Here there should be a refrence to the Orginizational Tier this refers to-->
+				<nbrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
+			</rdf:Description>
+		</nrdcrsh:referentialCharacteristic>
+
+		<!--Characteristics referring to the types of data we store about individal sites. These would relate to columns in relational database.-->
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Unique Identifier</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:ID"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Name</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Details</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Power</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Installation Location</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Creation Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Modification Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Photo</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:hexBinary"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+
+	</rdf:Description>
+
+	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment">
+
+		<!--Metadata about sites as a general entity-->
+		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<nrdcrsh:name>Deployment</nrdcrsh:name>
+		<nrdcrsh:pluralization>Deployments</nrdcrsh:pluralization>
+		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#component"/>
+		<nrdcrsh:childOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
+
+		<!-- Primary orginizing characteristic which orders the data we will store. This is a synthetic value -->
+		<nrdcrsh:ordinalCharacteristic>
+			<rdf:Description>
+				<rdfs:label>Deployment</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+			</rdf:Description>
+		</nrdcrsh:ordinalCharacteristic>
+
+
+		<!-- Characteristic representitive of a foreign key. Requires a different term or some rdf:resource refrence.-->
+		<nrdcrsh:referentialCharacteristic>
+			<rdf:Description>
+				<rdfs:label>System</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+				<!--Here there should be a refrence to the Orginizational Tier this refers to-->
+				<nbrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
+			</rdf:Description>
+		</nrdcrsh:referentialCharacteristic>
+
+		<!--Characteristics referring to the types of data we store about individal sites. These would relate to columns in relational database.-->
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Unique Identifier</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:ID"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Name</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Purpose</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Center Offset</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<!--This one is super unique. Data type in SQL is "geography". It looks like a special type of hex.-->
+		<!--
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Location</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic> -->
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Height From Ground</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:float"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Parent Logger</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Notes</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Established Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Abandoned Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Creation Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Modification Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
 
 
 	</rdf:Description>
 
 
+	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#component">
+
+		<!--Metadata about sites as a general entity-->
+		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<nrdcrsh:name>Component</nrdcrsh:name>
+		<nrdcrsh:pluralization>Components</nrdcrsh:pluralization>
+		<nrdcrsh:childOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
+
+		<!-- Primary orginizing characteristic which orders the data we will store. This is a synthetic value -->
+		<nrdcrsh:ordinalCharacteristic>
+			<rdf:Description>
+				<rdfs:label>Component</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+			</rdf:Description>
+		</nrdcrsh:ordinalCharacteristic>
+
+
+		<!-- Characteristic representitive of a foreign key. Requires a different term or some rdf:resource refrence.-->
+		<nrdcrsh:referentialCharacteristic>
+			<rdf:Description>
+				<rdfs:label>Deployment</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
+				<!--Here there should be a refrence to the Orginizational Tier this refers to-->
+				<nbrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
+			</rdf:Description>
+		</nrdcrsh:referentialCharacteristic>
+
+		<!--Characteristics referring to the types of data we store about individal sites. These would relate to columns in relational database.-->
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Unique Identifier</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:ID"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Name</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Manufacturer</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Model</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Serial Number</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Vendor</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Supplier</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Installation Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Installation Details</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Last Calibrated Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Wiring Notes</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:string"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Creation Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Modification Date</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:datetime"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+		<nrdcrsh:characteristic>
+			<rdf:Description>
+				<rdfs:label>Photo</rdfs:label>
+				<nrdcrsh:datatype rdf:resource="xsd:hexBinary"/>
+			</rdf:Description>
+		</nrdcrsh:characteristic>
+
+
+	</rdf:Description>
 
 
 </rdf:RDF>

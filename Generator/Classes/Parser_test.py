@@ -8,7 +8,7 @@ def test_contructor():
     assert tp.OwlSrc == "../test.owl"
 
 def test_query():
-    src = "./Generator/Ontology/test.owl"
+    src = "./Generator/Ontology/NRDCOntology.xml"
     tp = Parser(src)
 
     tp.query()
