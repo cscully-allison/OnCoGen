@@ -184,7 +184,7 @@
 				<rdfs:label>Network</rdfs:label>
 				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
 				<!--Here there should be a refrence to the Orginizational Tier this refers to-->
-				<nbrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
+				<nrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network"/>
 			</rdf:Description>
 		</nrdcrsh:referentialCharacteristic>
 
@@ -302,7 +302,7 @@
 				<rdfs:label>Site</rdfs:label>
 				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
 				<!--Here there should be a refrence to the Orginizational Tier this refers to-->
-				<nbrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
+				<nrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
 			</rdf:Description>
 		</nrdcrsh:referentialCharacteristic>
 
@@ -390,7 +390,7 @@
 				<rdfs:label>System</rdfs:label>
 				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
 				<!--Here there should be a refrence to the Orginizational Tier this refers to-->
-				<nbrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
+				<nrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
 			</rdf:Description>
 		</nrdcrsh:referentialCharacteristic>
 
@@ -508,7 +508,7 @@
 				<rdfs:label>Deployment</rdfs:label>
 				<nrdcrsh:datatype rdf:resource="xsd:integer"/>
 				<!--Here there should be a refrence to the Orginizational Tier this refers to-->
-				<nbrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
+				<nrdcrsh:referent rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
 			</rdf:Description>
 		</nrdcrsh:referentialCharacteristic>
 
