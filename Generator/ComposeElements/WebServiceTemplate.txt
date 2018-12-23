@@ -1,0 +1,6 @@
+{0}:                 #Web Service Name
+    build: .
+    ports:
+     - "{1}:{2}" # 1: internal port, 2: external port
+    volumes:
+     - {3}:{4}   # 3: local volume for data, 4: docker internal file area

@@ -1,0 +1,5 @@
+{0}:                           #database name
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: {1}  #database password

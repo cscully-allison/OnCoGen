@@ -1,0 +1,6 @@
+version: '3'
+services:
+  #database service
+  {0}
+  #beginning of web services
+  {1}
