@@ -3,9 +3,9 @@
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:nrdcrsh="https://www.sensor.nevada.edu/ontologies/research_site_hierarchy#">
+	xmlns:nrdcrsh="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#">
 
-	<owl:Ontology rdf:about="https://www.sensor.nevada.edu/metadata/research_site_hierarchy">
+	<owl:Ontology rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy">
 		<dc:title>NRDC Research Site Hierarchy</dc:title>
 		<dc:description>An ontology for defining the structural hierarchy of NRDC research sites and associated metadata. </dc:description>
 	</owl:Ontology>

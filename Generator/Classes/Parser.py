@@ -1,41 +1,72 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import Graph, URIRef, Namespace
-from rdflib.namespace import RDF, RDFS
+from rdflib.namespace import RDF, RDFS, DC, OWL
+import xml.etree.ElementTree as ET
 
 class Parser():
 
-    def __init__(self, OwlSrc=""):
+    def __init__(self, Configuration, OwlSrc=""):
         self.OwlSrc = OwlSrc
         self.Graph = Graph()
         self.TripleStore = []
+        self.Namespace = Namespace(self.GetConfiguration(Configuration, 'Namespace'))
+        self.LayerTerminology = self.GetConfiguration(Configuration, 'LayerTerminology')
+
 
     def GetOwlSrc(self):
         return self.OwlSrc
 
-    def ReadInOntology(self):
-        #query the ontology for specific key words
-        #  - we need to make sure that the file format is correct
-        #  - also need to make sure xml objects match ontology expectations
+    def GetConfiguration(self, ConfigFile, Tag):
+        OntConf = None
+        Tree = ET.parse(ConfigFile)
+        Root = Tree.getroot()
+
+        for Child in Root:
+            if Child.tag == "Ontology":
+                OntConf = Child
+
+        for Child in OntConf:
+            if Child.tag == Tag:
+                return Child.text
+
+    #combines a text refrent with our namespace
+    def BuildURIRef(self, Namespace, Referent):
+        return URIRef(Namespace + '#' + Referent)
+
+    def GetDatabaseName(self):
+        self.Graph.parse(self.OwlSrc)
+        NS = URIRef(self.Namespace)
+
+        for s,p,o in self.Graph.triples((NS, DC.title, None)):
+            Name = o.replace(' ', '_')
+            return Name + "_Database"
 
 
-
-        #parse out triples (into groups of objects?)
-
-        #return a list of triples
-
-        return
-
-    def query(self):
-
-
+    #retrieves a count for the number of services we will Requires
+    #todo: check for associated entities
+    def GetServiceCounts(self):
         self.Graph.parse(self.OwlSrc)
 
+        count = 0
+        LayerDescriptor = self.BuildURIRef(self.Namespace, self.LayerTerminology)
+
+        for s,p,o in self.Graph.triples((None, RDF.type, LayerDescriptor)):
+            count += 1
+
+        return count
+
+
+
+    def query(self):
 
         S = URIRef("http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site")
         SN = URIRef("http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network")
         OT = URIRef("http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier")
 
         NRDC_RSH = Namespace("https://www.sensor.nevada.edu/ontologies/research_site_hierarchy#")
+
+
+
 
         # import pprint
         # for tier in list(self.Graph[:RDF.type:OT]):

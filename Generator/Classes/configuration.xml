@@ -1,7 +1,0 @@
-<Configuration>
-  <ComposeElements>
-    <BaseTemplate>ComposeTemplate.txt</BaseTemplate>
-    <Services>WebServiceTemplate.txt</Services>
-    <DB>PostGresComposeSubTemplate.txt</DB>
-  </ComposeElements>
-</Configuration>

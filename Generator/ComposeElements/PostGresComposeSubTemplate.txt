@@ -1,5 +1,7 @@
 {0}:                           #database name
-    image: postgres
+    build:
+      context: ./Dockerfiles
+      dockerfile: DBDockerfile
     restart: always
-    environment:
-      POSTGRES_PASSWORD: {1}  #database password
+    volumes:
+      - ./SQL:/SQL
