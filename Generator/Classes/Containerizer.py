@@ -38,22 +38,28 @@ class Containerizer():
 
     def GetElementsTemplates(self, CE):
         templatefile = ''
-        for Child in CE:
-            if Child.tag == 'DB':
-                templatefile = Child.text
-                templatefile = self.ElementsFolder + templatefile
-                with open(templatefile, 'r') as F:
-                    self.DBComposeSubTemplate = F.read()
-            elif Child.tag == 'Services':
-                templatefile = Child.text
-                templatefile = self.ElementsFolder + templatefile
-                with open(templatefile, 'r') as F:
-                    self.WebServiceSubTemplate = F.read()
-            elif Child.tag == 'BaseTemplate':
-                templatefile = Child.text
-                templatefile = self.ElementsFolder + templatefile
-                with open(templatefile, 'r') as F:
-                    self.ComposeTemplate = F.read()
+        for C in CE:
+            if C.tag == 'DB':
+                for Child in C:
+                    if Child.tag == 'ElementName':
+                        templatefile = Child.text
+                        templatefile = self.ElementsFolder + templatefile
+                        with open(templatefile, 'r') as F:
+                            self.DBComposeSubTemplate = F.read()
+            elif C.tag == 'Services':
+                for Child in C:
+                    if Child.tag == 'ElementName':
+                        templatefile = Child.text
+                        templatefile = self.ElementsFolder + templatefile
+                        with open(templatefile, 'r') as F:
+                            self.WebServiceSubTemplate = F.read()
+            elif C.tag == 'BaseTemplate':
+                for Child in C:
+                    if Child.tag == 'ElementName':
+                        templatefile = Child.text
+                        templatefile = self.ElementsFolder + templatefile
+                        with open(templatefile, 'r') as F:
+                            self.ComposeTemplate = F.read()
         return
 
     def BuildWebServices(self, ServiceInfo):

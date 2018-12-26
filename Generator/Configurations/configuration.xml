@@ -1,0 +1,21 @@
+<Configuration>
+  <Ontology>
+    <Namespace>http://www.sensor.nevada.edu/ontologies/research_site_hierarchy</Namespace>
+    <LayerTerminology>organizational_tier</LayerTerminology>
+  </Ontology>
+  <ComposeElements>
+    <BaseTemplate>
+      <ElementName>ComposeTemplate.txt</ElementName>
+    </BaseTemplate>
+    <Services>
+      <ElementName>WebServiceTemplate.txt</ElementName>
+    </Services>
+    <DB>
+      <ElementName>PostGresComposeSubTemplate.txt</ElementName>
+      <Dockerfile>DBDockerfile</Dockerfile>
+    </DB>
+  </ComposeElements>
+  <SQL>
+    <InitTemplate>init.template.sql</InitTemplate>
+  </SQL>
+</Configuration>

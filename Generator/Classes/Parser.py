@@ -36,8 +36,9 @@ class Parser():
     def GetDatabaseName(self):
         self.Graph.parse(self.OwlSrc)
         NS = URIRef(self.Namespace)
+        Abbreviation = self.BuildURIRef(self.Namespace, 'abbreviation')
 
-        for s,p,o in self.Graph.triples((NS, DC.title, None)):
+        for s,p,o in self.Graph.triples((NS, Abbreviation, None)):
             Name = o.replace(' ', '_')
             return Name + "_Database"
 

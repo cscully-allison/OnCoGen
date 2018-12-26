@@ -7,6 +7,7 @@
 
 	<owl:Ontology rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy">
 		<dc:title>NRDC Research Site Hierarchy</dc:title>
+		<nrdcrsh:abbreviation>NRDC</nrdcrsh:abbreviation>
 		<dc:description>An ontology for defining the structural hierarchy of NRDC research sites and associated metadata. </dc:description>
 	</owl:Ontology>
 
