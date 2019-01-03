@@ -10,7 +10,7 @@
 version: '3'
 services:
   #database service
-  db:                           #database name
+  oncogen_db:                           #database name
     build:
       context: ./Dockerfiles
       dockerfile: DBDockerfile
@@ -21,10 +21,4 @@ services:
       - ./SQL:/SQL
 
   #beginning of web services
-  flasktest:
-    build:
-      context: ./Dockerfiles
-      dockerfile: FlaskTest
-    restart: always
-    ports:
-      - "5000:5000"
+  

@@ -1,12 +1,8 @@
 from abc import ABC
 
-DBIntializerInterface(ABC):
+class DBIntializerInterface(ABC):
     @abstractmethod
-    def CreateInitFile(self):
-        pass
-
-    @abstractmethod
-    def OutputInitFile(self):
+    def DefineSchemaAsClass(self):
         pass
 
     @abstractmethod
@@ -15,8 +11,4 @@ DBIntializerInterface(ABC):
 
     @abstractmethod
     def FormatTable(self, TableInfo):
-        pass
-
-    @abstractmethod
-    def OutputBuldTableFile(self):
         pass

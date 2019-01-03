@@ -40,7 +40,7 @@ class Parser():
 
         for s,p,o in self.Graph.triples((NS, Abbreviation, None)):
             Name = o.replace(' ', '_')
-            return Name + "_Database"
+            return Name + "_DB"
 
 
     #retrieves a count for the number of services we will Requires

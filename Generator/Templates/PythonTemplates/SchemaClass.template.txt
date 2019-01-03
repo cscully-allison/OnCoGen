@@ -1,0 +1,7 @@
+class {0}(Base):
+    __tablename__ = '{0}'
+
+    {1}
+
+    def __repr__(self):
+        return "<testtable(name='%s', fullname='%s', password='%s')>" % (self.name, self.fullname, self.password)

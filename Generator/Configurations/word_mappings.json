@@ -1,0 +1,13 @@
+{
+  "datatypes":{
+    "xsd:integer": "Integer",
+    "integer" : "Integer",
+    "int": "Integer",
+    "xsd:ID": "String",
+    "xsd:string": "String",
+    "xsd:datetime":"DateTime",
+    "xsd:hexBinary": "LargeBinary",
+    "xsd:float": "Float"
+  }
+
+}

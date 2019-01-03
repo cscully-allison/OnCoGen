@@ -1,0 +1,15 @@
+'''
+  This is an automatically generated file. Please do not edit it directly.
+
+'''
+
+
+from sqlalchemy import Column, Integer, String, Float, DateTime, LargeBinary
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+
+
+engine = create_engine('{0}', echo=True)
+Base = declarative_base()
+
+{1}

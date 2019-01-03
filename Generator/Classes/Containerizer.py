@@ -3,13 +3,15 @@ import xml.etree.ElementTree as ET
 class Containerizer():
     def __init__(self, Configuration):
         self.Configuration = Configuration #configuration file
-        self.ElementsFolder = 'ComposeElements/'
-        self.SQLFolder = 'SQL_Templates/'
+        self.ElementsFolder = 'Templates/ComposeElements/'
+        self.DockerTemplateFolder= 'Templates/DockerfileTemplates/'
         self.ComposeTemplate = ''
         self.DBComposeSubTemplate = ''
-        self.SQLInit = ''
         self.WebServiceSubTemplate = ''
         self.FinalYAML = ''
+        self.DBDFTemplate = ''
+        self.DBServTemplate = ''
+
 
         Tree = ET.parse(Configuration)
         Root = Tree.getroot()
@@ -17,17 +19,25 @@ class Containerizer():
         CompElem = self.GetNodeFromConf(Root, 'ComposeElements')
         self.GetElementsTemplates(CompElem)
 
-        SQLConf = self.GetNodeFromConf(Root, 'SQL')
-        self.GetSQLTemplates(SQLConf)
+        DockerConf = self.GetNodeFromConf(Root, 'Dockerfile')
+        self.GetDockerTemplates(DockerConf)
 
-    def GetSQLTemplates(self, SQLConf):
+        print(self.DBDFTemplate)
+        print(self.DBServTemplate)
+
+    def GetDockerTemplates(self, Dockerconf):
         templatefile = ''
-        for Child in SQLConf:
-            if Child.tag == 'InitTemplate':
+        for Child in Dockerconf:
+            if Child.tag == 'DBDockerfile':
                 templatefile = Child.text
-                templatefile = self.SQLFolder + templatefile
+                templatefile = self.DockerTemplateFolder + templatefile
                 with open(templatefile, 'r') as F:
-                    self.SQLInit = F.read()
+                    self.DBDFTemplate = F.read()
+            if Child.tag == 'ServiceDockerfile':
+                templatefile = Child.text
+                templatefile = self.DockerTemplateFolder + templatefile
+                with open(templatefile, 'r') as F:
+                    self.DBServTemplate = F.read()
 
     def GetNodeFromConf(self, Root, SubRoot):
         for Child in Root:
@@ -72,13 +82,14 @@ class Containerizer():
         User = 'OnCoGen'
 
         #build database template
-        DBTemplate = self.DBComposeSubTemplate.format('db')
-        InitTemplate = self.SQLInit.format(DBName, User, Password)
+        DBTemplate = self.DBComposeSubTemplate.format('oncogen_db')
+        FormattedDBDFT = self.DBDFTemplate.format(User, Password, DBName)
 
-        with open('SQL/init.sql', 'w') as Fout:
-            Fout.write(InitTemplate)
+        with open('Dockerfiles/DBDockerfile', 'w') as Fout:
+            Fout.write(FormattedDBDFT)
 
         return DBTemplate
+
 
     def BuildComposeTemplate(self, DBName, ServiceInfo):
         DBTemplate = self.BuildDatabase(DBName)

@@ -1,3 +1,4 @@
+<!--We will want to set up this file with an interface at one point.-->
 <Configuration>
   <Ontology>
     <Namespace>http://www.sensor.nevada.edu/ontologies/research_site_hierarchy</Namespace>
@@ -13,9 +14,12 @@
     <DB>
       <ElementName>PostGresComposeSubTemplate.txt</ElementName>
       <Dockerfile>DBDockerfile</Dockerfile>
+      <!--ConnectionString @location must match name in Containerizer.BuildDatabase function and the database yaml output of that function-->
+      <ConnectionString>postgresql://OnCoGen:OnCoGen@oncogen-db:5432/{0}</ConnectionString>
     </DB>
   </ComposeElements>
-  <SQL>
-    <InitTemplate>init.template.sql</InitTemplate>
-  </SQL>
+  <Dockerfile>
+    <DBDockerfile>DBDockerfile.template</DBDockerfile>
+    <ServiceDockerfile>ServiceDockerfile.template</ServiceDockerfile>
+  </Dockerfile>
 </Configuration>

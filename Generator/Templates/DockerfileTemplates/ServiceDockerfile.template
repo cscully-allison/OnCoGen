@@ -1,5 +1,6 @@
 FROM python:3.4-alpine
-COPY . /code
+COPY ./{0} /code
+COPY ./requirements.txt /code
 WORKDIR /code
 
 RUN \
@@ -9,4 +10,4 @@ RUN \
  apk --purge del .build-deps
 
 
-CMD ["python", "app.py"]
+CMD ["python", "{0}"]
