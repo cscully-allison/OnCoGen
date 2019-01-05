@@ -4,10 +4,20 @@
     "integer" : "Integer",
     "int": "Integer",
     "xsd:ID": "String",
+    "ID":"String",
     "xsd:string": "String",
+    "string": "String",
     "xsd:datetime":"DateTime",
+    "datetime":"DateTime",
     "xsd:hexBinary": "LargeBinary",
-    "xsd:float": "Float"
+    "hexBinary": "LargeBinary",
+    "xsd:float": "Float",
+    "float": "Float"
+  },
+  "column-aliases": {
+    "column": ["characteristic", "descriptor"],
+    "foreign-key": ["referentialCharacteristic"],
+    "primary-key": ["ordinalCharacteristic"]
   }
 
 }

@@ -5,7 +5,8 @@ from Generator import Generator
 
 
 def Main():
-    OnCoGen = Generator('Configurations/configuration.xml', 'Ontology/NRDCOntology.xml')
+    ConfigurationBundle = {'main':'Configurations/configuration.xml', 'lexicon':'Configurations/word_mappings.json'}
+    OnCoGen = Generator(ConfigurationBundle, 'Ontology/NRDCOntology.xml')
 
 
 Main()

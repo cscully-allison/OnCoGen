@@ -2,6 +2,10 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import Graph, URIRef, Namespace
 from rdflib.namespace import RDF, RDFS, DC, OWL
 import xml.etree.ElementTree as ET
+import json
+import pprint
+
+pp = pprint.PrettyPrinter()
 
 class Parser():
 
@@ -9,8 +13,10 @@ class Parser():
         self.OwlSrc = OwlSrc
         self.Graph = Graph()
         self.TripleStore = []
-        self.Namespace = Namespace(self.GetConfiguration(Configuration, 'Namespace'))
-        self.LayerTerminology = self.GetConfiguration(Configuration, 'LayerTerminology')
+        self.Namespace = Namespace(self.GetConfiguration(Configuration['main'], 'Namespace'))
+        self.LayerTerminology = self.GetConfiguration(Configuration['main'], 'LayerTerminology')
+        with open(Configuration['lexicon'], 'r') as JsonData:
+            self.lexicon = json.load(JsonData)
 
 
     def GetOwlSrc(self):
@@ -51,38 +57,49 @@ class Parser():
         count = 0
         LayerDescriptor = self.BuildURIRef(self.Namespace, self.LayerTerminology)
 
-        for s,p,o in self.Graph.triples((None, RDF.type, LayerDescriptor)):
+        for s,p,o in self.Graph.triples((None, RDFS.subClassOf, LayerDescriptor)):
             count += 1
 
         return count
 
+    def GetSingleCharacteristic(self, CharacteristicID):
+        Characteristic = {"Datatype":'', "Label":'', "PrimaryKey": False, "ForeignKey": False, "Autoincrement": False}
+        for s, p, o in self.Graph.triples((CharacteristicID, None, None)):
+            if p == RDFS.label:
+                Characteristic["Label"] = o
+            if p == self.BuildURIRef(self.Namespace, "datatype"):
+                Characteristic['Datatype'] = o
+
+        return Characteristic
+
+    def GetSingleSchema(self, SchemaName):
+        Schema = []
+
+        for s,p,o in self.Graph.triples((SchemaName, None, None)):
+            if p.split('#')[-1] in self.lexicon["column-aliases"]["column"]:
+                Characteristic = self.GetSingleCharacteristic(o)
+                if Characteristic not in Schema:
+                    Schema.append(Characteristic)
+
+            elif p.split('#')[-1] in self.lexicon["column-aliases"]["primary-key"]:
+                Characteristic = self.GetSingleCharacteristic(o)
+                Characteristic["PrimaryKey"] = True
+                Characteristic["Autoincrement"] = True
+                if Characteristic not in Schema:
+                    Schema.append(Characteristic)
+            #foreign key goes here
 
 
-    def query(self):
+        return Schema
 
-        S = URIRef("http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site")
-        SN = URIRef("http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network")
-        OT = URIRef("http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier")
+    def GetHierarchicalSchemaData(self):
+        SchemaBundle = {}
+        self.Graph.parse(self.OwlSrc)
+        LayerDescriptor = self.BuildURIRef(self.Namespace, self.LayerTerminology)
 
-        NRDC_RSH = Namespace("https://www.sensor.nevada.edu/ontologies/research_site_hierarchy#")
+        for s,p,o in self.Graph.triples((None, RDFS.subClassOf, LayerDescriptor)):
+            for su, pr, ob in self.Graph.triples((s, self.BuildURIRef(self.Namespace, "name"), None)):
+                SchemaBundle[ob] = {"Characteristics":[], "Relations": {}, "Name": ob}
+                SchemaBundle[ob]["Characteristics"] = self.GetSingleSchema(s)
 
-
-
-
-        # import pprint
-        # for tier in list(self.Graph[:RDF.type:OT]):
-        #     print(tier)
-        #     pprint.pprint(list(self.Graph[tier]))
-
-
-        for s,p,o in self.Graph.triples((S, NRDC_RSH.characteristic, None)):
-            print("%s is a charactertistic of site"%(o))
-            for su,pr,ob in self.Graph.triples((o, None, None)):
-                print("%s is the %s of %s"%(ob,pr,su))
-
-        # for s, p, o in g.triples((None, NRDC_RSH.parentOf, None)):
-        #     print("%s is parent of %s"%(s, o))
-        #     for su,pr,ob in g.triples((s, NRDC_RSH.characteristic, None)):
-        #         print("The parent of " + o + " is " + s +" and has the characteristic " + ob)
-        #     for su, pr, ob in g.triples((s, NRDC_RSH.ordinalCharacteristic, None)):
-        #         print(ob)
+        return SchemaBundle

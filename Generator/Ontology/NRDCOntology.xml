@@ -45,7 +45,7 @@
 
 
 <!-- In Progress: An "associated entity". Focus on the orginizational tiers for now. -->
-	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#document">
+	<owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#document">
 		<!--Metadata about document as a general entity-->
 		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#assocaited_entity" />
 		<nrdcrsh:name>Document</nrdcrsh:name>
@@ -65,14 +65,14 @@
 		<nrdcrsh:characteristic>Name</nrdcrsh:characteristic>
 		<nrdcrsh:characteristic>Path</nrdcrsh:characteristic>
 
-	</rdf:Description>
+	</owl:Class>
 
 
 <!--Descriptor of a site network with all associated characteristics-->
-	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network">
+	<owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network">
 
 		<!--Metadata about site network as a general entity-->
-		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<rdfs:subClassOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
 		<nrdcrsh:name>Site Network</nrdcrsh:name>
 		<nrdcrsh:pluralization>Site Networks</nrdcrsh:pluralization>
 		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site"/>
@@ -159,12 +159,12 @@
 			</rdf:Description>
 		</nrdcrsh:characteristic>
 
-	</rdf:Description>
+	</owl:Class>
 
-	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site">
+	<owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site">
 
 		<!--Metadata about sites as a general entity-->
-		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<rdfs:subClassOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
 		<nrdcrsh:name>Site</nrdcrsh:name>
 		<nrdcrsh:pluralization>Sites</nrdcrsh:pluralization>
 		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system"/>
@@ -277,12 +277,12 @@
 		</nrdcrsh:characteristic>
 
 
-	</rdf:Description>
+	</owl:Class>
 
-	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system">
+	<owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system">
 
 		<!--Metadata about sites as a general entity-->
-		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<rdfs:subClassOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
 		<nrdcrsh:name>System</nrdcrsh:name>
 		<nrdcrsh:pluralization>Systems</nrdcrsh:pluralization>
 		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
@@ -365,12 +365,12 @@
 		</nrdcrsh:characteristic>
 
 
-	</rdf:Description>
+	</owl:Class>
 
-	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment">
+	<owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment">
 
 		<!--Metadata about sites as a general entity-->
-		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<rdfs:subClassOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
 		<nrdcrsh:name>Deployment</nrdcrsh:name>
 		<nrdcrsh:pluralization>Deployments</nrdcrsh:pluralization>
 		<nrdcrsh:parentOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#component"/>
@@ -483,13 +483,13 @@
 		</nrdcrsh:characteristic>
 
 
-	</rdf:Description>
+	</owl:Class>
 
 
-	<rdf:Description rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#component">
+	<owl:Class rdf:about="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#component">
 
 		<!--Metadata about sites as a general entity-->
-		<rdf:type rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
+		<rdfs:subClassOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#organizational_tier"/>
 		<nrdcrsh:name>Component</nrdcrsh:name>
 		<nrdcrsh:pluralization>Components</nrdcrsh:pluralization>
 		<nrdcrsh:childOf rdf:resource="http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment"/>
@@ -614,7 +614,7 @@
 		</nrdcrsh:characteristic>
 
 
-	</rdf:Description>
+	</owl:Class>
 
 
 </rdf:RDF>

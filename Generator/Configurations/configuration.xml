@@ -15,11 +15,16 @@
       <ElementName>PostGresComposeSubTemplate.txt</ElementName>
       <Dockerfile>DBDockerfile</Dockerfile>
       <!--ConnectionString @location must match name in Containerizer.BuildDatabase function and the database yaml output of that function-->
-      <ConnectionString>postgresql://OnCoGen:OnCoGen@oncogen-db:5432/{0}</ConnectionString>
     </DB>
   </ComposeElements>
   <Dockerfile>
     <DBDockerfile>DBDockerfile.template</DBDockerfile>
     <ServiceDockerfile>ServiceDockerfile.template</ServiceDockerfile>
   </Dockerfile>
+  <Python>
+    <ColumnTemplate>ColumnDefinition.template</ColumnTemplate>
+    <SAClassTemplate>SchemaClass.template</SAClassTemplate>
+    <SAFileTemplate>SchemaFile.template</SAFileTemplate>
+  </Python>
+  <ConnectionString>postgresql://OnCoGen:OnCoGen@oncogen-db:5432/{0}</ConnectionString>
 </Configuration>

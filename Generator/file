@@ -1,0 +1,423 @@
+FROM postgres:latest
+ENV POSTGRES_USER {0}
+ENV POSTGRES_PASSWORD {1}
+ENV POSTGRES_DB {2}
+WORKDIR /SQL
+
+FROM python:3.4-alpine
+COPY ./{0} /code
+COPY ./requirements.txt /code
+WORKDIR /code
+
+RUN \
+ apk add --no-cache postgresql-libs && \
+ apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
+ python3 -m pip install -r requirements.txt --no-cache-dir && \
+ apk --purge del .build-deps
+
+
+CMD ["python", "{0}"]
+
+http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site-network
+http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#deployment
+http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#component
+http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#site
+http://www.sensor.nevada.edu/ontologies/research_site_hierarchy#system
+class Site Network(Base):
+    __tablename__ = 'Site Network'
+
+ Unique_Identifier = Column('Unique Identifier', String)
+
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Grant_Number_String = Column('Grant Number String', String)
+
+   Original_Funding_Agency = Column('Original Funding Agency', String)
+
+   Name = Column('Name', String)
+
+   Institution_Name = Column('Institution Name', String)
+
+   Original_Funding_Agency = Column('Original Funding Agency', String)
+
+   Grant_Number_String = Column('Grant Number String', String)
+
+   Institution_Name = Column('Institution Name', String)
+
+   Name = Column('Name', String)
+
+   Network = Column('Network', Integer, primary_key=True)
+
+   Name = Column('Name', String)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Alias = Column('Alias', String)
+
+   Alias = Column('Alias', String)
+
+   Grant_Number_String = Column('Grant Number String', String)
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Institution_Name = Column('Institution Name', String)
+
+   Alias = Column('Alias', String)
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Network = Column('Network', Integer, primary_key=True)
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Original_Funding_Agency = Column('Original Funding Agency', String)
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Started_Date = Column('Started Date', DateTime)
+
+   Network = Column('Network', Integer, primary_key=True)
+
+   {}
+  {}
+
+  #  def __repr__(self):
+  #      return "<testtable(name='%s', fullname='%s', password='%s')>" % (self.name, self.fullname, self.password)
+
+class Deployment(Base):
+    __tablename__ = 'Deployment'
+
+ Deployment = Column('Deployment', Integer, primary_key=True)
+
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Parent_Logger = Column('Parent Logger', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Name = Column('Name', String)
+
+   Height_From_Ground = Column('Height From Ground', Float)
+
+   Name = Column('Name', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Abandoned_Date = Column('Abandoned Date', DateTime)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Center_Offset = Column('Center Offset', String)
+
+   Parent_Logger = Column('Parent Logger', String)
+
+   Notes = Column('Notes', String)
+
+   Abandoned_Date = Column('Abandoned Date', DateTime)
+
+   Deployment = Column('Deployment', Integer, primary_key=True)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Height_From_Ground = Column('Height From Ground', Float)
+
+   Name = Column('Name', String)
+
+   Established_Date = Column('Established Date', DateTime)
+
+   Established_Date = Column('Established Date', DateTime)
+
+   Center_Offset = Column('Center Offset', String)
+
+   Notes = Column('Notes', String)
+
+   Center_Offset = Column('Center Offset', String)
+
+   Abandoned_Date = Column('Abandoned Date', DateTime)
+
+   Height_From_Ground = Column('Height From Ground', Float)
+
+   Established_Date = Column('Established Date', DateTime)
+
+   Purpose = Column('Purpose', String)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Notes = Column('Notes', String)
+
+   Deployment = Column('Deployment', Integer, primary_key=True)
+
+   Purpose = Column('Purpose', String)
+
+   Purpose = Column('Purpose', String)
+
+   Parent_Logger = Column('Parent Logger', String)
+
+   {}
+  {}
+
+  #  def __repr__(self):
+  #      return "<testtable(name='%s', fullname='%s', password='%s')>" % (self.name, self.fullname, self.password)
+
+class Site(Base):
+    __tablename__ = 'Site'
+
+ Site = Column('Site', Integer, primary_key=True)
+
+
+   Time_Zone_Offset = Column('Time Zone Offset', Integer)
+
+   Name = Column('Name', String)
+
+   Notes = Column('Notes', String)
+
+   GPS_Landmark = Column('GPS Landmark', String)
+
+   Notes = Column('Notes', String)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Time_Zone_Offset = Column('Time Zone Offset', Integer)
+
+   GPS_Landmark = Column('GPS Landmark', String)
+
+   Time_Zone_Abbreviation = Column('Time Zone Abbreviation', String)
+
+   Name = Column('Name', String)
+
+   Name = Column('Name', String)
+
+   Alias = Column('Alias', String)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Time_Zone_Abbreviation = Column('Time Zone Abbreviation', String)
+
+   Time_Zone_Name = Column('Time Zone Name', String)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Site = Column('Site', Integer, primary_key=True)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Site = Column('Site', Integer, primary_key=True)
+
+   Landmark_Photo = Column('Landmark Photo', LargeBinary)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Alias = Column('Alias', String)
+
+   Time_Zone_Name = Column('Time Zone Name', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Alias = Column('Alias', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Time_Zone_Name = Column('Time Zone Name', String)
+
+   Landmark_Photo = Column('Landmark Photo', LargeBinary)
+
+   Time_Zone_Abbreviation = Column('Time Zone Abbreviation', String)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Time_Zone_Offset = Column('Time Zone Offset', Integer)
+
+   GPS_Landmark = Column('GPS Landmark', String)
+
+   Notes = Column('Notes', String)
+
+   Landmark_Photo = Column('Landmark Photo', LargeBinary)
+
+   {}
+  {}
+
+  #  def __repr__(self):
+  #      return "<testtable(name='%s', fullname='%s', password='%s')>" % (self.name, self.fullname, self.password)
+
+class Component(Base):
+    __tablename__ = 'Component'
+
+ Vendor = Column('Vendor', String)
+
+
+   Installation_Details = Column('Installation Details', String)
+
+   Manufacturer = Column('Manufacturer', String)
+
+   Photo = Column('Photo', LargeBinary)
+
+   Component = Column('Component', Integer, primary_key=True)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Serial_Number = Column('Serial Number', String)
+
+   Last_Calibrated_Date = Column('Last Calibrated Date', DateTime)
+
+   Supplier = Column('Supplier', String)
+
+   Installation_Date = Column('Installation Date', DateTime)
+
+   Wiring_Notes = Column('Wiring Notes', String)
+
+   Photo = Column('Photo', LargeBinary)
+
+   Supplier = Column('Supplier', String)
+
+   Component = Column('Component', Integer, primary_key=True)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Model = Column('Model', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Vendor = Column('Vendor', String)
+
+   Serial_Number = Column('Serial Number', String)
+
+   Serial_Number = Column('Serial Number', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Wiring_Notes = Column('Wiring Notes', String)
+
+   Installation_Date = Column('Installation Date', DateTime)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Supplier = Column('Supplier', String)
+
+   Photo = Column('Photo', LargeBinary)
+
+   Installation_Details = Column('Installation Details', String)
+
+   Manufacturer = Column('Manufacturer', String)
+
+   Manufacturer = Column('Manufacturer', String)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Vendor = Column('Vendor', String)
+
+   Installation_Details = Column('Installation Details', String)
+
+   Installation_Date = Column('Installation Date', DateTime)
+
+   Name = Column('Name', String)
+
+   Model = Column('Model', String)
+
+   Name = Column('Name', String)
+
+   Last_Calibrated_Date = Column('Last Calibrated Date', DateTime)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Model = Column('Model', String)
+
+   Wiring_Notes = Column('Wiring Notes', String)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Last_Calibrated_Date = Column('Last Calibrated Date', DateTime)
+
+   Name = Column('Name', String)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Component = Column('Component', Integer, primary_key=True)
+
+   {}
+  {}
+
+  #  def __repr__(self):
+  #      return "<testtable(name='%s', fullname='%s', password='%s')>" % (self.name, self.fullname, self.password)
+
+class System(Base):
+    __tablename__ = 'System'
+
+ Installation_Location = Column('Installation Location', String)
+
+
+   System = Column('System', Integer, primary_key=True)
+
+   Photo = Column('Photo', LargeBinary)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Power = Column('Power', String)
+
+   Installation_Location = Column('Installation Location', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Photo = Column('Photo', LargeBinary)
+
+   Power = Column('Power', String)
+
+   Details = Column('Details', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   Power = Column('Power', String)
+
+   Details = Column('Details', String)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   System = Column('System', Integer, primary_key=True)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Name = Column('Name', String)
+
+   Photo = Column('Photo', LargeBinary)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Name = Column('Name', String)
+
+   System = Column('System', Integer, primary_key=True)
+
+   Installation_Location = Column('Installation Location', String)
+
+   Name = Column('Name', String)
+
+   Details = Column('Details', String)
+
+   Modification_Date = Column('Modification Date', DateTime)
+
+   Unique_Identifier = Column('Unique Identifier', String)
+
+   Creation_Date = Column('Creation Date', DateTime)
+
+   {}
+  {}
+
+  #  def __repr__(self):
+  #      return "<testtable(name='%s', fullname='%s', password='%s')>" % (self.name, self.fullname, self.password)
+

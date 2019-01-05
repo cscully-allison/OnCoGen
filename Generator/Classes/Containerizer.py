@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 class Containerizer():
     def __init__(self, Configuration):
-        self.Configuration = Configuration #configuration file
+        self.Configuration = Configuration['main'] #configuration file
         self.ElementsFolder = 'Templates/ComposeElements/'
         self.DockerTemplateFolder= 'Templates/DockerfileTemplates/'
         self.ComposeTemplate = ''
@@ -13,7 +13,7 @@ class Containerizer():
         self.DBServTemplate = ''
 
 
-        Tree = ET.parse(Configuration)
+        Tree = ET.parse(self.Configuration)
         Root = Tree.getroot()
 
         CompElem = self.GetNodeFromConf(Root, 'ComposeElements')
