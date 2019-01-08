@@ -5,8 +5,15 @@ from Generator import Generator
 
 
 def Main():
+    print("Generating")
+    OntologyFile = 'Ontology/NRDCOntology.xml'
     ConfigurationBundle = {'main':'Configurations/configuration.xml', 'lexicon':'Configurations/word_mappings.json'}
-    OnCoGen = Generator(ConfigurationBundle, 'Ontology/NRDCOntology.xml')
 
+    for i, arg in enumerate(sys.argv):
+        if arg == "-i":
+            OntologyFile = sys.argv[i+1]
+
+    OnCoGen = Generator(ConfigurationBundle, OntologyFile)
+    print(". . . Done")
 
 Main()

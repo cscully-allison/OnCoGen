@@ -22,9 +22,6 @@ class Containerizer():
         DockerConf = self.GetNodeFromConf(Root, 'Dockerfile')
         self.GetDockerTemplates(DockerConf)
 
-        print(self.DBDFTemplate)
-        print(self.DBServTemplate)
-
     def GetDockerTemplates(self, Dockerconf):
         templatefile = ''
         for Child in Dockerconf:
@@ -116,8 +113,6 @@ class Containerizer():
         DBTemplate = self.BuildDatabase(DBName)
         TableBuilder = self.GenerateTableBuilder(TableBuildFile)
         WebServices = self.BuildWebServices(ServiceInfo)
-
-        print(TableBuilder)
 
         self.FinalYAML = self.ComposeTemplate.format(DBTemplate, TableBuilder, WebServices)
 

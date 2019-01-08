@@ -98,7 +98,6 @@ class DBInitializer(DBInitializerInterface):
             ClassDef += self.DefineSchemaAsClass(Tier, SchemaBundle[Tier]) + '\n\n'
 
         SchemaFile = self.SchemaFile.format(ConnectionString, ClassDef)
-        print (SchemaFile)
         self.SchemaOutput = SchemaFile
         return SchemaFile
 
