@@ -11,11 +11,18 @@ class Generator():
         self.BuildContainers()
 
     def BuildContainers(self):
+        #Parse and get metadata from Ontology
         ServiceCount = self.Parser.GetServiceCounts()
         DBName = self.Parser.GetDatabaseName()
         Schema = self.Parser.GetHierarchicalSchemaData()
-        self.ContBuilder.BuildComposeTemplate(DBName, {})
+
         self.DBI.CreateSchemas(Schema, DBName)
+        self.DBI.OutputSchemaFile()
+        BuildTableFile = self.DBI.BuildTablesUsingSchema()
+
+        #Begin building container
+        self.ContBuilder.BuildComposeTemplate(DBName, Schema, BuildTableFile)
+
         self.ContBuilder.OutputFinalYAML()
 
 

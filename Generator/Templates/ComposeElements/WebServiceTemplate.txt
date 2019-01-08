@@ -2,7 +2,10 @@
     build:
       context: {1}
       dockerfile: {2}
+    links:
+      - oncogen_db
     ports:
      - "{3}:{4}" # 1: internal port, 2: external port
+    command: ["python", "{7}"]
     volumes:
      - {5}:{6}   # 3: local volume for data, 4: docker internal file area

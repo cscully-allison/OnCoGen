@@ -72,6 +72,27 @@ class Containerizer():
                             self.ComposeTemplate = F.read()
         return
 
+    def GenerateTableBuilder(self, TableBuildFile):
+        TableBldrName = "build_tables"
+        Context="./Dockerfiles"
+        Dockerfile="TableBldr"
+        Port="5999"
+        VolumeOut="./Dockerfiles"
+        VolumeIn="/code"
+
+        BuildTableTemplate = self.WebServiceSubTemplate.format(TableBldrName,
+                                                        Context,
+                                                        Dockerfile,
+                                                        Port,
+                                                        Port,
+                                                        VolumeOut,
+                                                        VolumeIn,
+                                                        TableBuildFile
+                                                        )
+
+
+        return BuildTableTemplate
+
     def BuildWebServices(self, ServiceInfo):
         return ''
 
@@ -91,11 +112,14 @@ class Containerizer():
         return DBTemplate
 
 
-    def BuildComposeTemplate(self, DBName, ServiceInfo):
+    def BuildComposeTemplate(self, DBName, ServiceInfo, TableBuildFile):
         DBTemplate = self.BuildDatabase(DBName)
+        TableBuilder = self.GenerateTableBuilder(TableBuildFile)
         WebServices = self.BuildWebServices(ServiceInfo)
 
-        self.FinalYAML = self.ComposeTemplate.format(DBTemplate, WebServices)
+        print(TableBuilder)
+
+        self.FinalYAML = self.ComposeTemplate.format(DBTemplate, TableBuilder, WebServices)
 
     def OutputFinalYAML(self):
         with open('docker-compose.yml', 'w') as Fout:

@@ -26,5 +26,5 @@
     <SAClassTemplate>SchemaClass.template</SAClassTemplate>
     <SAFileTemplate>SchemaFile.template</SAFileTemplate>
   </Python>
-  <ConnectionString>postgresql://OnCoGen:OnCoGen@oncogen-db:5432/{0}</ConnectionString>
+  <ConnectionString>postgresql://OnCoGen:OnCoGen@oncogen_db:5432/{0}</ConnectionString>
 </Configuration>

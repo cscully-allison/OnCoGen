@@ -21,6 +21,8 @@ class DBInitializer(DBInitializerInterface):
         with open(Configuration['lexicon'], 'r') as JsonData:
             self.Lexicon = json.load(JsonData)
         self.Templates = 'Templates/PythonTemplates/'
+        self.SchemaFileName = 'Schema'
+        self.SchemaOutput = ''
         self.SchemaFile = ''
         self.SchemaClass = ''
         self.ColumnDefinition = ''
@@ -96,8 +98,30 @@ class DBInitializer(DBInitializerInterface):
             ClassDef += self.DefineSchemaAsClass(Tier, SchemaBundle[Tier]) + '\n\n'
 
         SchemaFile = self.SchemaFile.format(ConnectionString, ClassDef)
-        print SchemaFile
+        print (SchemaFile)
+        self.SchemaOutput = SchemaFile
         return SchemaFile
 
-    def OutputSchemaFile(self, file):
-        pass
+    def OutputSchemaFile(self):
+
+        file = 'Dockerfiles/{}.py'
+
+        file = file.format(self.SchemaFileName)
+
+        with open(file, 'w+') as f:
+            f.write(self.SchemaOutput)
+
+    def BuildTablesUsingSchema(self):
+        TableBuildFile = '''
+from {} import Base, engine
+
+Base.metadata.create_all(engine)
+        '''
+        BuildTables = 'BuildTables.py'
+        File = 'Dockerfiles/BuildTables.py'
+        TableBuildFile = TableBuildFile.format(self.SchemaFileName)
+
+        with open(File, 'w+') as f:
+            f.write(TableBuildFile)
+
+        return BuildTables

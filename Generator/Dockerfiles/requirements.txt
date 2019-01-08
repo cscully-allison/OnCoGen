@@ -1,6 +1,4 @@
 pytest
 Flask
-sparqlwrapper
-rdflib
 sqlalchemy
 psycopg2

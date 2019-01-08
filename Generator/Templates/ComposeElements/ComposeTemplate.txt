@@ -11,5 +11,7 @@ version: '3'
 services:
   #database service
   {0}
-  #beginning of web services
+  #table builder
   {1}
+  #beginning of web services
+  {2}
