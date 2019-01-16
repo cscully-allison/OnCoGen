@@ -98,6 +98,18 @@ class Containerizer():
         InitTemplate = ''
         Password = 'OnCoGen'
         User = 'OnCoGen'
+        TableBldr = '''FROM python:3.4-alpine
+COPY . /code
+COPY ../Configurations/requirements.txt /code
+WORKDIR /code
+
+RUN \
+ apk add --no-cache postgresql-libs && \
+ apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
+ python3 -m pip install -r requirements.txt --no-cache-dir && \
+ apk --purge del .build-deps
+'''
+
 
         #build database template
         DBTemplate = self.DBComposeSubTemplate.format('oncogen_db')
@@ -105,6 +117,9 @@ class Containerizer():
 
         with open('Dockerfiles/DBDockerfile', 'w') as Fout:
             Fout.write(FormattedDBDFT)
+
+        with open('Dockerfiles/TableBldr', 'w') as Fout:
+            Fout.write(TableBldr)
 
         return DBTemplate
 

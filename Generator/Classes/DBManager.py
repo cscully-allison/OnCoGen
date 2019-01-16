@@ -111,13 +111,15 @@ class DBInitializer(DBInitializerInterface):
             f.write(self.SchemaOutput)
 
     def BuildTablesUsingSchema(self):
-        TableBuildFile = '''
-from {} import Base, engine
-
-Base.metadata.create_all(engine)
-        '''
+        TableBuildFile = ''
+        TemplateFile = self.Templates + 'TableCreate.template'
         BuildTables = 'BuildTables.py'
         File = 'Dockerfiles/BuildTables.py'
+
+        with open(TemplateFile, 'r') as f:
+            TableBuildFile = f.read()
+
+
         TableBuildFile = TableBuildFile.format(self.SchemaFileName)
 
         with open(File, 'w+') as f:
