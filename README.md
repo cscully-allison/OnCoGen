@@ -5,11 +5,11 @@ A repository for a code-generating software package that takes an ontology descr
 This software relies on two packages which must be downloaded and configured before use.
 
 1. Docker
- * Installation Instructions:
+ * Installation Instructions: https://docs.docker.com/install/overview/
 
 2. Python & Pip
-  * Python Installation Instructions:
-  * Pip Installation Instructions:
+  * Python Installation Instructions: https://www.python.org/downloads/
+  * Pip Installation Instructions: https://pip.pypa.io/en/stable/installing/
 
 # Installation Instructions
 
