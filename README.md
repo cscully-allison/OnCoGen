@@ -19,9 +19,9 @@ This software relies on two packages which must be downloaded and configured bef
 pip install -r requirements.txt
 ```
 
-#Running Instructions
+# Running Instructions
 
-##Linux or Mac
+## Linux or Mac
 1. Navigate to the "Generator/" directory in the command line.
 2. From the "Generator/" directory run the following lines of code:
 
@@ -51,14 +51,14 @@ psql <DataBaseName> OnCoGen
 \i <filename>.sql
 ```
 
-Note: The default test SQL file which loads data into the default NRDC_DB is called "Tests.sql". If you wish to modify this file or add your own file to test your own schema, you may add an additional file to this directory or modify this file freely. The container will detect any new added files or modifications to exiting files in this directory.
+ * Note: The default test SQL file which loads data into the default NRDC_DB is called "Tests.sql". If you wish to modify this file or add your own file to test your own schema, you may add an additional file to this directory or modify this file freely. The container will detect any new added files or modifications to exiting files in this directory.
 
-  a. To exit the sql program use the following command:
+  5. a. To exit the sql program use the following command:
 ```
 \quit
 ```
 
-  b. To exit the container run the following command:
+  5. b. To exit the container run the following command:
 ```
 \exit
 ```
